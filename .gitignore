@@ -41,6 +41,10 @@ bld/
 publish/
 deploy.zip
 
+# App settings con credenciales
+appsettings.Development.json
+appsettings.Production.json
+
 # Entity Framework
 Migrations/
 
