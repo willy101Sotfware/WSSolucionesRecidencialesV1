@@ -14,6 +14,22 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORS - Permitir localhost:4200 y el dominio de Azure
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp", policy =>
+    {
+        policy.WithOrigins(
+                "http://localhost:4200",
+                "https://localhost:4200",
+                "https://*.azurewebsites.net")
+              .SetIsOriginAllowedToAllowWildcardSubdomains()
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 // Registro de capas
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
@@ -23,6 +39,8 @@ var app = builder.Build();
 // Pipeline
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseCors("AllowAngularApp");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
