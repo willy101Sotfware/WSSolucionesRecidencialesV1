@@ -1,0 +1,19 @@
+[
+  {
+    "id": "/subscriptions/cfa3b17f-841d-4847-a414-22c9c40edb91/resourceGroups/wssolucionesrecidenciales-api_group/providers/Microsoft.Resources/deployments/Microsoft.Web-WebApp-Portal-f1b84dc5-8bb5/operations/12526A82F7E31F49",
+    "operationId": "12526A82F7E31F49",
+    "properties": {
+      "provisioningOperation": "Create",
+      "provisioningState": "Succeeded",
+      "timestamp": "2026-04-28T14:48:38.0231835Z",
+      "duration": "PT4.175565S",
+      "trackingId": "82e773c8-3ea7-461d-95d8-b9c9188c63c6",
+      "statusCode": "OK",
+      "targetResource": {
+        "id": "/subscriptions/cfa3b17f-841d-4847-a414-22c9c40edb91/resourceGroups/wssolucionesrecidenciales-api_group/providers/Microsoft.Web/serverfarms/ASP-wssolucionesrecidencialesapigro-b865",
+        "resourceType": "Microsoft.Web/serverfarms",
+        "resourceName": "ASP-wssolucionesrecidencialesapigro-b865"
+      }
+    }
+  }
+]
