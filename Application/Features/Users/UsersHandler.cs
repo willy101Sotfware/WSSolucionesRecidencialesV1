@@ -10,6 +10,7 @@ namespace Application.Features.Users;
 // Queries
 public record GetAllUsersQuery : IRequest<List<UserResponse>>;
 public record GetUserByIdQuery(int Id) : IRequest<UserResponse?>;
+public record LoginQuery(string Username, string Password) : IRequest<LoginResponse?>;
 
 // Commands
 public record CreateUserCommand(CreateUserRequest Request) : IRequest<int>;
@@ -20,6 +21,7 @@ public record DeleteUserCommand(int Id) : IRequest<bool>;
 public class UsersHandler :
     IRequestHandler<GetAllUsersQuery, List<UserResponse>>,
     IRequestHandler<GetUserByIdQuery, UserResponse?>,
+    IRequestHandler<LoginQuery, LoginResponse?>,
     IRequestHandler<CreateUserCommand, int>,
     IRequestHandler<UpdateUserCommand, bool>,
     IRequestHandler<DeleteUserCommand, bool>
@@ -86,5 +88,24 @@ public class UsersHandler :
         _context.Users.Remove(user);
         await _context.SaveChangesAsync(cancellationToken);
         return true;
+    }
+
+    public async Task<LoginResponse?> Handle(LoginQuery request, CancellationToken cancellationToken)
+    {
+        var user = await _context.Users
+            .AsNoTracking()
+            .FirstOrDefaultAsync(u => u.Username == request.Username && u.Password == request.Password, cancellationToken);
+
+        if (user == null)
+            return null;
+
+        // Generar token simple (en producción usar JWT)
+        var token = Convert.ToBase64String(Guid.NewGuid().ToByteArray());
+
+        return new LoginResponse
+        {
+            Token = token,
+            User = _mapper.Map<UserResponse>(user)
+        };
     }
 }

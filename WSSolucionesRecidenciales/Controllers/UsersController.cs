@@ -16,6 +16,17 @@ public class UsersController : ControllerBase
         _mediator = mediator;
     }
 
+    [HttpPost("login")]
+    public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
+    {
+        var result = await _mediator.Send(new LoginQuery(request.Username, request.Password));
+
+        if (result == null)
+            return Unauthorized(new { message = "Usuario o contraseña incorrectos" });
+
+        return Ok(result);
+    }
+
     [HttpGet]
     public async Task<ActionResult<List<UserResponse>>> GetAll()
     {
