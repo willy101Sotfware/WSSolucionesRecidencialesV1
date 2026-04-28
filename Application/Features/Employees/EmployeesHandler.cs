@@ -58,6 +58,12 @@ public class EmployeesHandler :
         var employee = _mapper.Map<Employee>(request.Request);
         employee.Activo = 1;
 
+        // Si buildingId es 0, establecer como null
+        if (employee.BuildingId == 0)
+        {
+            employee.BuildingId = null;
+        }
+
         _context.Employees.Add(employee);
         await _context.SaveChangesAsync(cancellationToken);
 
