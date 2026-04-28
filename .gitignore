@@ -38,6 +38,8 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+publish/
+deploy.zip
 
 # Entity Framework
 Migrations/
