@@ -48,6 +48,7 @@ public class QuotationsHandler :
         var quotation = await _context.Quotations
             .AsNoTracking()
             .Include(q => q.Building)
+            .Include(q => q.QuotationItems)
             .FirstOrDefaultAsync(q => q.Id == request.Id, cancellationToken);
 
         return quotation == null ? null : _mapper.Map<QuotationResponse>(quotation);

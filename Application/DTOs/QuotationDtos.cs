@@ -76,4 +76,5 @@ public class QuotationResponse
     public int ShowPlazo { get; set; }
     public string? Garantia { get; set; }
     public int ShowGarantia { get; set; }
+    public List<QuotationItemResponse>? QuotationItems { get; set; }
 }
