@@ -38,6 +38,14 @@ app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
+
+// Servir archivos estáticos del frontend
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.MapControllers();
+
+// Fallback para Angular (SPA)
+app.MapFallbackToFile("index.html");
 
 app.Run();
