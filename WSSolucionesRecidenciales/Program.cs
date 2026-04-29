@@ -31,11 +31,9 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
-// Pipeline
 app.UseSwagger();
 app.UseSwaggerUI();
 
-// CORS debe ir antes de UseHttpsRedirection y UseAuthorization
 app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();

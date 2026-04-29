@@ -65,7 +65,20 @@ public class QuotationItemsHandler :
 
     public async Task<int> Handle(CreateQuotationItemCommand request, CancellationToken cancellationToken)
     {
-        var item = _mapper.Map<QuotationItem>(request.Request);
+        var item = new QuotationItem
+        {
+            IdCotizacion = request.Request.IdCotizacion,
+            Descripcion = request.Request.Descripcion ?? string.Empty,
+            Cantidad = request.Request.Cantidad,
+            UnidadMedida = request.Request.UnidadMedida,
+            Imagen = request.Request.Imagen,
+            ValorUnitario = request.Request.ValorUnitario,
+            ValorTotal = request.Request.ValorTotal,
+            PlazoEntrega = request.Request.PlazoEntrega,
+            ShowPlazo = request.Request.ShowPlazo,
+            Garantia = request.Request.Garantia,
+            ShowGarantia = request.Request.ShowGarantia
+        };
 
         _context.QuotationItems.Add(item);
         await _context.SaveChangesAsync(cancellationToken);

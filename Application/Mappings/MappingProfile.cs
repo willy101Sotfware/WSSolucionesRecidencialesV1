@@ -36,7 +36,8 @@ public class MappingProfile : Profile
 
         // QuotationItems
         CreateMap<QuotationItem, QuotationItemResponse>();
-        CreateMap<CreateQuotationItemRequest, QuotationItem>();
+        CreateMap<CreateQuotationItemRequest, QuotationItem>()
+            .ForMember(dest => dest.Id, opt => opt.Ignore());
         CreateMap<UpdateQuotationItemRequest, QuotationItem>();
 
         // Users

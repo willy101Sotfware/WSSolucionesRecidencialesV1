@@ -33,9 +33,10 @@ public class QuotationItemConfiguration : IEntityTypeConfiguration<QuotationItem
         builder.Property(qi => qi.ShowGarantia)
             .HasDefaultValue(0);
 
-        builder.HasOne(qi => qi.Quotation)
-            .WithMany(q => q.QuotationItems)
-            .HasForeignKey(qi => qi.IdCotizacion)
-            .OnDelete(DeleteBehavior.Cascade);
+        // FK removida temporalmente
+        //builder.HasOne(qi => qi.Quotation)
+        //    .WithMany(q => q.QuotationItems)
+        //    .HasForeignKey(qi => qi.IdCotizacion)
+        //    .OnDelete(DeleteBehavior.NoAction);
     }
 }
