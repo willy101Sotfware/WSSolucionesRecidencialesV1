@@ -31,21 +31,16 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 
+// CORS debe ir PRIMERO antes que cualquier otro middleware
+app.UseCors("AllowAll");
+
 app.UseSwagger();
 app.UseSwaggerUI();
-
-app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
 
-// Servir archivos estáticos del frontend
-app.UseDefaultFiles();
-app.UseStaticFiles();
-
+// MAPEO DE CONTROLLERS API
 app.MapControllers();
-
-// Fallback para Angular (SPA)
-app.MapFallbackToFile("index.html");
 
 app.Run();
